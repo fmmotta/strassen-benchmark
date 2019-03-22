@@ -2,7 +2,6 @@
 #include <string>
 #include <fstream>
 #include <iostream>
-#include <vector>
 #include <algorithm>
 #include <cmath>
 
@@ -54,15 +53,16 @@ void subtract( int &A,
                int &C,
                int dim);
 
-void printMatrix(vector< vector<int> > matrix, int n);
-void read(string filename, vector< vector<int> > &A, vector< vector<int> > &B);
+void printMatrix(float *matrix, int n);
+void read(string filename, int &A, int &B);
 
 
-void strassenR(vector< vector<int> > &A, 
-              vector< vector<int> > &B, 
-              vector< vector<int> > &C, int tam) {
-    if (tam <= leafsize) {
-        ikjalgorithm(A, B, C, tam);
+void strassenR(float &A, 
+               float &B, 
+               float &C, 
+               int dim) {
+    if (dim <= blas_boundary) {
+        sgemm('n','n', &dim, &dim, &dim, 1.0, &A, &dim, &B, &dim, 0, &C, &dim);
         return;
     }
 
