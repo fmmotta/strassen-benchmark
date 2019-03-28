@@ -30,13 +30,14 @@ for (i=0; i<m; i++)
 
 }
 
-float strassen( float A, float B, int n, int min_size)
+void strassen( float *A, float *B, float *C, int n, int min_size)
     {
-        float C[n*n];
+        float alpha = 1.0;
+        int i;
                 
         if (n < min_size) {
-            sgemm("N","N", &n, &n, &n, 1.0, A, &n, B, &n, 0, C, &n);
-            return C;
+            sgemm("N","N", &n, &n, &n, &alpha, A, &n, B, &n, 0, C, &n);
+            return;
         }
         else
         {
@@ -105,13 +106,13 @@ float strassen( float A, float B, int n, int min_size)
                 P_71[i] = A_21[i] + A_22[i];        
             }
 
-            P_1 = strassen(P_11, P_12, block_size, min_size);
-            P_2 = strassen(P_21, P_22, block_size, min_size);
-            P_3 = strassen(P_31, P_32, block_size, min_size);
-            P_4 = strassen(P_41, B_22, block_size, min_size);
-            P_5 = strassen(A_11, P_52, block_size, min_size);
-            P_6 = strassen(A_22, P_62, block_size, min_size);
-            P_7 = strassen(P_71, B_11, block_size, min_size);
+            strassen(P_11, P_12, P_1, block_size, min_size);
+            strassen(P_21, P_22, P_2, block_size, min_size);
+            strassen(P_31, P_32, P_3, block_size, min_size);
+            strassen(P_41, B_22, P_4, block_size, min_size);
+            strassen(A_11, P_52, P_5, block_size, min_size);
+            strassen(A_22, P_62, P_6, block_size, min_size);
+            strassen(P_71, B_11, P_7, block_size, min_size);
 
 
             for (i = 0; i < sq_size ; ++i) {
@@ -121,34 +122,38 @@ float strassen( float A, float B, int n, int min_size)
                 C[i+block_size*((5*block_size + i)/block_size)] = P_2[i] - P_3[i] + P_5[i] - P_7[i];
             }
 
-            return C;
+            return;
         }
+    }
 
-main(int argc, char **argv)
+int main(int argc, char **argv)
 
 {
 
-    int n = (1 << argv[1]); //Bit shift trick to find powers of 2
-    int min_size[argv[2]];
+    int n = (1 << atoi(argv[1])); //Bit shift trick to find powers of 2
+    int min_size = atoi(argv[2]);
     int sq_size = n*n;
     float A[sq_size];
     float B[sq_size];
+    float C[sq_size];
+    float alpha = 1.0;
     clock_t start, end;
     double cpu_time_used_strassen, cpu_time_used_blas;
 
     srand48(1) ;
 
-    for (i=0; i<sq_size;i++)
+    for (int i=0; i<sq_size;i++){
         A[i] = drand48();
         B[i] = drand48();
+    }
 
     start = clock();
-    strassen(&A, &B, n, min_size);
+    strassen(A, B, C, n, min_size);
     end = clock();
     cpu_time_used_strassen = ((double)(end - start))/CLOCKS_PER_SEC;
 
     start = clock();
-    sgemm("N","N", &n, &n, &n, 1.0, A, &n, B, &n, 0, C, &n);
+    sgemm("N","N", &n, &n, &n, &alpha, A, &n, B, &n, 0, C, &n);
     end = clock();
     cpu_time_used_blas = ((double)(end - start))/CLOCKS_PER_SEC;
 
