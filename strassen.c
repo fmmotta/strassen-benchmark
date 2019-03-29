@@ -33,10 +33,11 @@ for (i=0; i<m; i++)
 void strassen( float *A, float *B, float *C, int n, int min_size)
     {
         float alpha = 1.0;
+        float beta = 0.0;
         int i;
                 
         if (n < min_size) {
-            sgemm("N","N", &n, &n, &n, &alpha, A, &n, B, &n, 0, C, &n);
+            sgemm("N","N", &n, &n, &n, &alpha, A, &n, B, &n, &beta, C, &n);
             return;
         }
         else
@@ -137,8 +138,10 @@ int main(int argc, char **argv)
     float B[sq_size];
     float C[sq_size];
     float alpha = 1.0;
+    float beta = 0.0;
     clock_t start, end;
     double cpu_time_used_strassen, cpu_time_used_blas;
+    
 
     srand48(1) ;
 
@@ -147,14 +150,19 @@ int main(int argc, char **argv)
         B[i] = drand48();
     }
 
+    //imp_matriz(n,n,n,A);
+    //imp_matriz(n,n,n,B);
+    printf("n: %i \n", n);
+
     start = clock();
     strassen(A, B, C, n, min_size);
     end = clock();
     cpu_time_used_strassen = ((double)(end - start))/CLOCKS_PER_SEC;
 
     start = clock();
-    sgemm("N","N", &n, &n, &n, &alpha, A, &n, B, &n, 0, C, &n);
+    sgemm("N","N", &n, &n, &n, &alpha, A, &n, B, &n, &beta, C, &n);
     end = clock();
     cpu_time_used_blas = ((double)(end - start))/CLOCKS_PER_SEC;
 
+    printf("TIMES: \n Time_strassen: %g \n Time_blas: %g \n",cpu_time_used_strassen, cpu_time_used_blas);
 }
