@@ -42,6 +42,7 @@ void strassen( float *A, float *B, float *C, int n, int min_size)
         }
         else
         {
+            printf("sf 1 \n");
             int block_size = n/2;
             int sq_size = block_size*block_size;
 
@@ -54,6 +55,7 @@ void strassen( float *A, float *B, float *C, int n, int min_size)
             float B_21[sq_size];    
             float B_22[sq_size];    
 
+            printf("sf 2 \n");
             for (i = 0; i < sq_size ; ++i) {
                 A_11[i] = A[i+block_size*(i/block_size)];        
                 A_12[i] = A[i+block_size*((block_size + i)/block_size)];        
@@ -66,6 +68,7 @@ void strassen( float *A, float *B, float *C, int n, int min_size)
                 B_22[i] = B[i+block_size*((5*block_size + i)/block_size)];        
             }
 
+            printf("sf 3 \n");
             float P_1[sq_size];
             float P_2[sq_size];
             float P_3[sq_size];
@@ -91,6 +94,7 @@ void strassen( float *A, float *B, float *C, int n, int min_size)
 
             float P_71[sq_size]; // A_21 + A22
 
+            printf("sf 4 \n");
             for (i = 0; i < sq_size - 1; ++i) {
                 P_11[i] = A_12[i] - A_22[i];        
                 P_12[i] = B_21[i] + B_22[i];        
@@ -107,6 +111,7 @@ void strassen( float *A, float *B, float *C, int n, int min_size)
                 P_71[i] = A_21[i] + A_22[i];        
             }
 
+            printf("sf 5 \n");
             strassen(P_11, P_12, P_1, block_size, min_size);
             strassen(P_21, P_22, P_2, block_size, min_size);
             strassen(P_31, P_32, P_3, block_size, min_size);
@@ -116,6 +121,7 @@ void strassen( float *A, float *B, float *C, int n, int min_size)
             strassen(P_71, B_11, P_7, block_size, min_size);
 
 
+            printf("sf 6 \n");
             for (i = 0; i < sq_size ; ++i) {
                 C[i+block_size*(i/block_size)] = P_1[i] + P_2[i] - P_4[i] + P_6[i];
                 C[i+block_size*((block_size + i)/block_size)] = P_4[i] + P_5[i];
@@ -123,6 +129,7 @@ void strassen( float *A, float *B, float *C, int n, int min_size)
                 C[i+block_size*((5*block_size + i)/block_size)] = P_2[i] - P_3[i] + P_5[i] - P_7[i];
             }
 
+            printf("sf 7 \n");
             return;
         }
     }
@@ -134,13 +141,16 @@ int main(int argc, char **argv)
     int n = (1 << atoi(argv[1])); //Bit shift trick to find powers of 2
     int min_size = atoi(argv[2]);
     int sq_size = n*n;
-    float A[sq_size];
-    float B[sq_size];
-    float C[sq_size];
+    //float A[sq_size];
+    //float B[sq_size];
+    //float C[sq_size];
     float alpha = 1.0;
     float beta = 0.0;
     clock_t start, end;
     double cpu_time_used_strassen, cpu_time_used_blas;
+    float * A = (float *) malloc(sq_size * sizeof(float));
+    float * B = (float *) malloc(sq_size * sizeof(float));
+    float * C = (float *) malloc(sq_size * sizeof(float));
     
 
     srand48(1) ;
