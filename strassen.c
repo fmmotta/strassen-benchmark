@@ -79,20 +79,28 @@ void strassen( float *A, float *B, float *C, int n, int min_size)
             
             n = block_size;
 
+            printf("A11 \n\n");
             imp_matriz(n,n,n,A_11);
             printf("\n\n");
+            printf("A12 \n\n");
             imp_matriz(n,n,n,A_12);
             printf("\n\n");
+            printf("A_21 \n\n");
             imp_matriz(n,n,n,A_21);
             printf("\n\n");
+            printf("A22 \n\n");
             imp_matriz(n,n,n,A_22);
             printf("\n\n");
+            printf("B11 \n\n");
             imp_matriz(n,n,n,B_11);
             printf("\n\n");
+            printf("B12 \n\n");
             imp_matriz(n,n,n,B_12);
             printf("\n\n");
+            printf("B21 \n\n");
             imp_matriz(n,n,n,B_21);
             printf("\n\n");
+            printf("B22 \n\n");
             imp_matriz(n,n,n,B_22);
             printf("\n\n");
 */
@@ -123,7 +131,7 @@ void strassen( float *A, float *B, float *C, int n, int min_size)
             float P_71[sq_size]; // A_21 + A22
 
             //printf("sf 4 \n");
-            for (i = 0; i < sq_size - 1; ++i) {
+            for (i = 0; i < sq_size ; ++i) {
                 P_11[i] = A_12[i] - A_22[i];        
                 P_12[i] = B_21[i] + B_22[i];        
 
@@ -138,7 +146,39 @@ void strassen( float *A, float *B, float *C, int n, int min_size)
                 P_62[i] = B_21[i] - B_11[i];        
                 P_71[i] = A_21[i] + A_22[i];        
             }
-
+/*
+            n = block_size;
+            printf("A12 - A22\n\n");
+            imp_matriz(n,n,n,P_11);
+            printf("\n\n");
+            printf("B21 + B22\n\n");
+            imp_matriz(n,n,n,P_12);
+            printf("\n\n");
+            printf("A11 + A22\n\n");
+            imp_matriz(n,n,n,P_21);
+            printf("\n\n");
+            printf("B11 + B22\n\n");
+            imp_matriz(n,n,n,P_22);
+            printf("\n\n");
+            printf("A11 - A21\n\n");
+            imp_matriz(n,n,n,P_31);
+            printf("\n\n");
+            printf("B11 + B12\n\n");
+            imp_matriz(n,n,n,P_32);
+            printf("\n\n");
+            printf("A11 + A12\n\n");
+            imp_matriz(n,n,n,P_41);
+            printf("\n\n");
+            printf("B12 - B22\n\n");
+            imp_matriz(n,n,n,P_52);
+            printf("\n\n");
+            printf("B21 - B11\n\n");
+            imp_matriz(n,n,n,P_62);
+            printf("\n\n");
+            printf("A21 + A22\n\n");
+            imp_matriz(n,n,n,P_71);
+            printf("\n\n");
+*/
             //printf("sf 5 \n");
             strassen(P_11, P_12, P_1, block_size, min_size);
             strassen(P_21, P_22, P_2, block_size, min_size);
@@ -196,7 +236,7 @@ int main(int argc, char **argv)
     printf("n: %i \n", n);
 
     start = clock();
-    strassen(A, B, C, n, min_size);
+//    strassen(A, B, C, n, min_size);
     end = clock();
     cpu_time_used_strassen = ((double)(end - start))/CLOCKS_PER_SEC;
 
@@ -211,7 +251,7 @@ int main(int argc, char **argv)
     cpu_time_used_blas = ((double)(end - start))/CLOCKS_PER_SEC;
 
     printf("TIMES: \n Time_strassen: %g \n Time_blas: %g \n",cpu_time_used_strassen, cpu_time_used_blas);
-    printf("A:  \n\n");
+/*    printf("A:  \n\n");
     imp_matriz(n,n,n,A);
     printf("B:  \n\n");
     imp_matriz(n,n,n,B);
@@ -222,5 +262,5 @@ int main(int argc, char **argv)
     printf("R:  \n\n");
     imp_matriz(n,n,n,R);
     printf("\n\n");
-
+*/
 }
