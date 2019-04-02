@@ -233,10 +233,10 @@ int main(int argc, char **argv)
 
     //imp_matriz(n,n,n,A);
     //imp_matriz(n,n,n,B);
-    printf("n: %i \n", n);
+    //printf("n: %i \n", n);
 
     start = clock();
-//    strassen(A, B, C, n, min_size);
+    strassen(A, B, C, n, min_size);
     end = clock();
     cpu_time_used_strassen = ((double)(end - start))/CLOCKS_PER_SEC;
 
@@ -250,7 +250,8 @@ int main(int argc, char **argv)
 
     cpu_time_used_blas = ((double)(end - start))/CLOCKS_PER_SEC;
 
-    printf("TIMES: \n Time_strassen: %g \n Time_blas: %g \n",cpu_time_used_strassen, cpu_time_used_blas);
+    printf(" %i, %g, %g \n", n, cpu_time_used_strassen, cpu_time_used_blas); //print for script
+    //printf("TIMES: \n Time_strassen: %g \n Time_blas: %g \n",cpu_time_used_strassen, cpu_time_used_blas);
 /*    printf("A:  \n\n");
     imp_matriz(n,n,n,A);
     printf("B:  \n\n");
