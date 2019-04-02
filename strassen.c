@@ -49,7 +49,7 @@ void strassen( float *A, float *B, float *C, int n, int min_size)
             //printf("sf 1 \n");
             int block_size = n/2;
             int sq_size = block_size*block_size;
-
+/*
             float A_11[sq_size];    
             float A_12[sq_size];    
             float A_21[sq_size];    
@@ -71,7 +71,7 @@ void strassen( float *A, float *B, float *C, int n, int min_size)
                 B_21[i] = B[i+block_size*((block_size + i)/block_size)];        
                 B_22[i] = B[i+block_size*((2*sq_size + i + block_size)/block_size)];        
             }
-/*            
+            
             imp_matriz(n,n,n,A);
             printf("\n\n");
             imp_matriz(n,n,n,B);
@@ -123,14 +123,41 @@ void strassen( float *A, float *B, float *C, int n, int min_size)
             float P_32[sq_size]; // B_11 - B12
 
             float P_41[sq_size]; // A_11 + A12
+            float P_42[sq_size]; // B22
 
+            float P_51[sq_size]; // A11
             float P_52[sq_size]; // B_12 - B22
 
+            float P_61[sq_size]; // A22
             float P_62[sq_size]; // B_21 - B11
 
             float P_71[sq_size]; // A_21 + A22
+            float P_72[sq_size]; // B11
 
-            //printf("sf 4 \n");
+            for (i = 0; i < sq_size; ++i) {
+                P_11[i] = A[i+block_size*((2*sq_size + i)/block_size)] - A[i+block_size*((2*sq_size + i + block_size)/block_size)];
+                P_12[i] = B[i+block_size*((block_size + i)/block_size)] + B[i+block_size*((2*sq_size + i + block_size)/block_size)]; 
+
+                P_21[i] = A[i+block_size*(i/block_size)] + A[i+block_size*((2*sq_size + i + block_size)/block_size)];  
+                P_22[i] = B[i+block_size*(i/block_size)] + B[i+block_size*((2*sq_size + i + block_size)/block_size)];
+
+                P_31[i] = A[i+block_size*(i/block_size)] - A[i+block_size*((block_size + i)/block_size)];
+                P_32[i] = B[i+block_size*(i/block_size)] + B[i+block_size*((2*sq_size + i)/block_size)];
+            
+                P_41[i] = A[i+block_size*(i/block_size)] + A[i+block_size*((2*sq_size + i)/block_size)];
+                P_42[i] = B[i+block_size*((2*sq_size + i + block_size)/block_size)]; //B_22 
+
+                P_51[i] = A[i+block_size*(i/block_size)]; //A_11         
+                P_52[i] = B[i+block_size*((2*sq_size + i)/block_size)] - B[i+block_size*((2*sq_size + i + block_size)/block_size)];
+
+                P_61[i] = A[i+block_size*((2*sq_size + i + block_size)/block_size)]; //A_22 
+                P_62[i] = B[i+block_size*((block_size + i)/block_size)] - B[i+block_size*(i/block_size)];
+
+                P_71[i] = A[i+block_size*((block_size + i)/block_size)] + A[i+block_size*((2*sq_size + i + block_size)/block_size)];    
+                P_72[i] = B[i+block_size*(i/block_size)]; //B_11 
+            }
+
+/*            //printf("sf 4 \n");
             for (i = 0; i < sq_size ; ++i) {
                 P_11[i] = A_12[i] - A_22[i];        
                 P_12[i] = B_21[i] + B_22[i];        
@@ -146,7 +173,7 @@ void strassen( float *A, float *B, float *C, int n, int min_size)
                 P_62[i] = B_21[i] - B_11[i];        
                 P_71[i] = A_21[i] + A_22[i];        
             }
-/*
+
             n = block_size;
             printf("A12 - A22\n\n");
             imp_matriz(n,n,n,P_11);
@@ -183,10 +210,10 @@ void strassen( float *A, float *B, float *C, int n, int min_size)
             strassen(P_11, P_12, P_1, block_size, min_size);
             strassen(P_21, P_22, P_2, block_size, min_size);
             strassen(P_31, P_32, P_3, block_size, min_size);
-            strassen(P_41, B_22, P_4, block_size, min_size);
-            strassen(A_11, P_52, P_5, block_size, min_size);
-            strassen(A_22, P_62, P_6, block_size, min_size);
-            strassen(P_71, B_11, P_7, block_size, min_size);
+            strassen(P_41, P_42, P_4, block_size, min_size);
+            strassen(P_51, P_52, P_5, block_size, min_size);
+            strassen(P_61, P_62, P_6, block_size, min_size);
+            strassen(P_71, P_72, P_7, block_size, min_size);
 
 
             //printf("sf 6 \n");
@@ -224,7 +251,7 @@ int main(int argc, char **argv)
     float * R = (float *) malloc(sq_size * sizeof(float));
 
 
-    srand48(1) ;
+    //srand48(1) ;
 
     for (int i=0; i<sq_size;i++){
         A[i] = drand48();
@@ -250,7 +277,7 @@ int main(int argc, char **argv)
 
     cpu_time_used_blas = ((double)(end - start))/CLOCKS_PER_SEC;
 
-    printf(" %i, %g, %g \n", n, cpu_time_used_strassen, cpu_time_used_blas); //print for script
+    //printf(" %i, %g, %g \n", n, cpu_time_used_strassen, cpu_time_used_blas); //print for script
     //printf("TIMES: \n Time_strassen: %g \n Time_blas: %g \n",cpu_time_used_strassen, cpu_time_used_blas);
 /*    printf("A:  \n\n");
     imp_matriz(n,n,n,A);

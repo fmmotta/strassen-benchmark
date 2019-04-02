@@ -1,4 +1,4 @@
-set terminal svg size 350,262 fname 'Verdana' 
+set terminal svg enhanced background rgb 'white' size 1080,720 fname 'Verdana' 
 set output 'plot_time.svg'
 
 set title "Time Comparison"
