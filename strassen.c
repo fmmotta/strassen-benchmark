@@ -35,21 +35,37 @@ void strassen( float *A, float *B, float *C, int n, int min_size, float * P_1, f
         float alpha = 1.0;
         float beta = 0.0;
         int i;
-                
-        if (n == 1){
-            C[0] = A[0]*B[0];
+        int odd = 0;        
+        if (n < min_size) {
+            sgemm("N","N", &n, &n, &n, &alpha, A, &n, B, &n, &beta, C, &n);
             return;
         }
-        else if (n < min_size || n%2 == 1) {
-            sgemm("N","N", &n, &n, &n, &alpha, A, &n, B, &n, &beta, C, &n);
+        else if (n == 1){
+            C[0] = A[0]*B[0];
             return;
         }
         else
         {
+
+            if (n%2 == 0) {
+                for (i = 0; i < (n+1)*(n+1); ++i) {
+                    A[i] = A[i+(n-1)*(i/n)];    
+                    B[i] = B[i+(n-1)*(i/n)];    
+                }
+            }
+            else{
+                n += 1;
+                odd = 1;
+                imp_matriz(n,n,n,A);
+            }
+
+            printf("n %i odd %i \n",n,odd);
+            //imp_matriz(n,n,n,A);
             //printf("sf 1 \n");
             int block_size = n/2;
             int sq_size = block_size*block_size;
             
+            printf("bs %i sq %i \n",block_size,sq_size);
             //printf("sf 3 \n");
 
             for (i = 0; i < sq_size; ++i) {
@@ -102,9 +118,9 @@ int main(int argc, char **argv)
 
 {
 
-    int n = 2*atoi(argv[1]);//(1 << atoi(argv[1])); //Bit shift trick to find powers of 2
+    int n = atoi(argv[1]);//(1 << atoi(argv[1])); //Bit shift trick to find powers of 2
     int min_size = atoi(argv[2]);
-    int sq_size = n*n;
+    int sq_size = (n+1)*(n+1);
     //float A[sq_size];
     //float B[sq_size];
     //float C[sq_size];
@@ -116,7 +132,6 @@ int main(int argc, char **argv)
     float * B = (float *) malloc(sq_size * sizeof(float));
     float * C = (float *) malloc(sq_size * sizeof(float));
     float * D = (float *) malloc(sq_size * sizeof(float));
-    
 
     float * P_1 = (float *) malloc(sq_size * sizeof(float));
     float * P_2 = (float *) malloc(sq_size * sizeof(float));
@@ -147,14 +162,19 @@ int main(int argc, char **argv)
     float * P_71 = (float *) malloc(sq_size * sizeof(float));
     float * P_72 = (float *) malloc(sq_size * sizeof(float));
 
-    //srand48(1) ;
+    srand48(1) ;
 
     for (int i=0; i<sq_size;i++){
-        A[i] = drand48();
-        B[i] = drand48();
+        if ( ((i+1)%(n+1) == 0) || (i >= (sq_size - (n+1)))){
+            A[i] = 0.;
+            B[i] = 0.;
+        }
+        else{
+            A[i] = drand48();
+            B[i] = drand48();
+        }
     }
-
-    //imp_matriz(n,n,n,A);
+    //imp_matriz(n+1,n+1,n+1,A);
     //imp_matriz(n,n,n,B);
     //printf("n: %i \n", n);
 
@@ -168,16 +188,16 @@ int main(int argc, char **argv)
     end = clock();
 
     //If checking for residue
-/*    float * R = (float *) malloc(sq_size * sizeof(float));
+    float * R = (float *) malloc(sq_size * sizeof(float));
     for (int i=0; i<sq_size;i++){
         R[i] = D[i] - C[i];
     }
-*/
+
     cpu_time_used_blas = ((double)(end - start))/CLOCKS_PER_SEC;
 
-    printf(" %i, %g, %g \n", n, cpu_time_used_strassen, cpu_time_used_blas); //print for script
+//    printf(" %i, %g, %g \n", n, cpu_time_used_strassen, cpu_time_used_blas); //print for script
     //printf("TIMES: \n Time_strassen: %g \n Time_blas: %g \n",cpu_time_used_strassen, cpu_time_used_blas);
-/*    printf("A:  \n\n");
+    printf("A:  \n\n");
     imp_matriz(n,n,n,A);
     printf("B:  \n\n");
     imp_matriz(n,n,n,B);
@@ -188,5 +208,5 @@ int main(int argc, char **argv)
     printf("R:  \n\n");
     imp_matriz(n,n,n,R);
     printf("\n\n");
-*/
+
 }
