@@ -63,7 +63,8 @@ void strassen( float *A, float *B, float *C,int n, int min_size)
                     }
                 }            
             }
-            imp_matriz(n,n,n,A);
+            printf("N: %i\n",n);
+            //imp_matriz(n,n,n,A);
 
 /*            if (n%2){
                 //imp_matriz(n,n,n,A);
@@ -162,6 +163,15 @@ void strassen( float *A, float *B, float *C,int n, int min_size)
                 }
             }
             n = old_n;   
+            free(P_Aux1);   
+            free(P_Aux2);   
+            free(P_1);   
+            free(P_2);   
+            free(P_3);   
+            free(P_4);   
+            free(P_5);   
+            free(P_6);   
+            free(P_7);   
             return;
         }
     }
@@ -173,7 +183,7 @@ int main(int argc, char **argv)
     int n = atoi(argv[1]);//(1 << atoi(argv[1])); //Bit shift trick to find powers of 2
     int min_size = atoi(argv[2]);
     int sq_size = n*n;
-    int alloc_size = (n+1)*(n+1);
+    int alloc_size = 1024;//(n+1)*(n+1);
     //float A[sq_size];
     //float B[sq_size];
     //float C[sq_size];
@@ -215,7 +225,7 @@ int main(int argc, char **argv)
 
     printf(" %i, %g, %g \n", n, cpu_time_used_strassen, cpu_time_used_blas); //print for script
     //printf("TIMES: \n Time_strassen: %g \n Time_blas: %g \n",cpu_time_used_strassen, cpu_time_used_blas);
-    printf("A:  \n\n");
+/*    printf("A:  \n\n");
     imp_matriz(n,n,n,A);
     printf("B:  \n\n");
     imp_matriz(n,n,n,B);
@@ -223,8 +233,12 @@ int main(int argc, char **argv)
     imp_matriz(n,n,n,D);
     printf("C: \n\n");
     imp_matriz(n,n,n,C);
-    printf("R:  \n\n");
+*/    printf("R:  \n\n");
     imp_matriz(n,n,n,R);
     printf("\n\n");
 
+    free(A);
+    free(B);
+    free(C);
+    free(D);
 }
