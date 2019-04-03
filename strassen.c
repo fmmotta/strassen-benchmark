@@ -49,7 +49,6 @@ void strassen( float *A, float *B, float *C,int n, int min_size)
 
             //imp_matriz(n,n,n,A);
             if (n%2){
-                printf("in here?\n");
                 n += 1;
                 odd = 1;
                 for (i = (n*n - 1); i >= 0; --i){
@@ -136,15 +135,15 @@ void strassen( float *A, float *B, float *C,int n, int min_size)
                 C[i+block_size*((block_size + i)/block_size)] = P_6[i] + P_7[i];
                 C[i+block_size*((2*sq_size + block_size + i)/block_size)] = P_2[i] - P_3[i] + P_5[i] - P_7[i];
             }
-            imp_matriz(n,n,n,C);
+            //imp_matriz(n,n,n,C);
             if (odd){
-                printf("ODD\n");
                 n -= 1;     
                 for (i = 0; i < n*n; ++i) {
                     C[i] = C[i+(i/n)];    
                 }
             }
             free(P_1);
+/*            free(P_1);
             free(P_2);
             free(P_3);
             free(P_4);
@@ -166,7 +165,7 @@ void strassen( float *A, float *B, float *C,int n, int min_size)
             free(P_71);
             free(P_72);
             //printf("sf 7 \n");
-            return;
+*/            return;
         }
     }
 
@@ -189,8 +188,6 @@ int main(int argc, char **argv)
     float * B = (float *) malloc(alloc_size * sizeof(float));
     float * C = (float *) malloc(alloc_size * sizeof(float));
     float * D = (float *) malloc(alloc_size * sizeof(float));
-    float * A_aux = (float *) malloc(alloc_size * sizeof(float));
-    float * B_aux = (float *) malloc(alloc_size * sizeof(float));
 
     srand48(1) ;
 
@@ -213,24 +210,24 @@ int main(int argc, char **argv)
     cpu_time_used_strassen = ((double)(end - start))/CLOCKS_PER_SEC;
 
     //If checking for residue
-    float * R = (float *) malloc(alloc_size * sizeof(float));
+/*    float * R = (float *) malloc(alloc_size * sizeof(float));
     for (int i=0; i<sq_size;i++){
         R[i] = D[i] - C[i];
     }
+*/
 
-
-//    printf(" %i, %g, %g \n", n, cpu_time_used_strassen, cpu_time_used_blas); //print for script
+    printf(" %i, %g, %g \n", n, cpu_time_used_strassen, cpu_time_used_blas); //print for script
     //printf("TIMES: \n Time_strassen: %g \n Time_blas: %g \n",cpu_time_used_strassen, cpu_time_used_blas);
 /*    printf("A:  \n\n");
     imp_matriz(n,n,n,A);
     printf("B:  \n\n");
     imp_matriz(n,n,n,B);
-*/    printf("D:  \n\n");
+    printf("D:  \n\n");
     imp_matriz(n,n,n,D);
     printf("C: \n\n");
     imp_matriz(n,n,n,C);
     printf("R:  \n\n");
     imp_matriz(n,n,n,R);
     printf("\n\n");
-
+*/
 }
