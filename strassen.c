@@ -142,7 +142,6 @@ void strassen( float *A, float *B, float *C,int n, int min_size)
                     C[i] = C[i+(i/n)];    
                 }
             }
-            free(P_1);
 /*            free(P_1);
             free(P_2);
             free(P_3);
