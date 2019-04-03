@@ -141,7 +141,7 @@ void strassen( float *A, float *B, float *C,int n, int min_size)
                 printf("ODD\n");
                 n -= 1;     
                 for (i = 0; i < n*n; ++i) {
-                    C[i] = C[i+(i/(n-1))];    
+                    C[i] = C[i+(i/n)];    
                 }
             }
             free(P_1);
