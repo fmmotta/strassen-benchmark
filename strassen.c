@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include <math.h>
+#include <stdbool.h>
 #define sgemm sgemm_
 
 
@@ -30,7 +32,7 @@ for (i=0; i<m; i++)
 
 }
 
-void strassen( float *A, float *B, float *C,int n, int min_size)
+void strassen( float *A, float *B, float *C,int n, int min_size, float * P_1, float * P_2, float * P_3, float * P_4, float * P_5, float * P_6, float * P_7, float * P_11, float * P_12, float * P_21, float * P_22, float * P_31, float * P_32, float * P_41, float * P_42, float * P_51, float * P_52, float * P_61, float * P_62, float * P_71, float * P_72)
     {
         float alpha = 1.0;
         float beta = 0.0;
@@ -46,12 +48,9 @@ void strassen( float *A, float *B, float *C,int n, int min_size)
         }
         else
         {
-
-            //imp_matriz(n,n,n,A);
-            if (n%2){
-                printf("in here?\n");
+            int old_n = n;
+            while (ceil(log2(n)) != floor(log2(n))){
                 n += 1;
-                odd = 1;
                 for (i = (n*n - 1); i >= 0; --i){
                     if ((i > (n*n - n - 1)) || (i+1)%n == 0){
                          A[i] = 0;
@@ -72,20 +71,6 @@ void strassen( float *A, float *B, float *C,int n, int min_size)
             //printf("bs %i sq %i \n",block_size,sq_size);
             //printf("sf 3 \n");
 
-            float * P_11 = (float *) malloc(sq_size * sizeof(float));
-            float * P_12 = (float *) malloc(sq_size * sizeof(float));
-            float * P_21 = (float *) malloc(sq_size * sizeof(float));
-            float * P_22 = (float *) malloc(sq_size * sizeof(float));
-            float * P_31 = (float *) malloc(sq_size * sizeof(float));
-            float * P_32 = (float *) malloc(sq_size * sizeof(float));
-            float * P_41 = (float *) malloc(sq_size * sizeof(float));
-            float * P_42 = (float *) malloc(sq_size * sizeof(float));
-            float * P_51 = (float *) malloc(sq_size * sizeof(float));
-            float * P_52 = (float *) malloc(sq_size * sizeof(float));
-            float * P_61 = (float *) malloc(sq_size * sizeof(float));
-            float * P_62 = (float *) malloc(sq_size * sizeof(float));
-            float * P_71 = (float *) malloc(sq_size * sizeof(float));
-            float * P_72 = (float *) malloc(sq_size * sizeof(float));
 
             for (i = 0; i < sq_size; ++i) {
                 P_11[i] = A[i+block_size*((2*sq_size + i)/block_size)] - A[i+block_size*((2*sq_size + i + block_size)/block_size)];
@@ -110,22 +95,15 @@ void strassen( float *A, float *B, float *C,int n, int min_size)
                 P_72[i] = B[i+block_size*(i/block_size)]; //B_11 
             }
 
-            float * P_1 = (float *) malloc(sq_size * sizeof(float));
-            float * P_2 = (float *) malloc(sq_size * sizeof(float));
-            float * P_3 = (float *) malloc(sq_size * sizeof(float));
-            float * P_4 = (float *) malloc(sq_size * sizeof(float));
-            float * P_5 = (float *) malloc(sq_size * sizeof(float));
-            float * P_6 = (float *) malloc(sq_size * sizeof(float));
-            float * P_7 = (float *) malloc(sq_size * sizeof(float));
 
             //printf("sf 5 \n");
-            strassen(P_11, P_12, P_1, block_size, min_size);
-            strassen(P_21, P_22, P_2, block_size, min_size);
-            strassen(P_31, P_32, P_3, block_size, min_size);
-            strassen(P_41, P_42, P_4, block_size, min_size);
-            strassen(P_51, P_52, P_5, block_size, min_size);
-            strassen(P_61, P_62, P_6, block_size, min_size);
-            strassen(P_71, P_72, P_7, block_size, min_size);
+            strassen(P_11, P_12, P_1, block_size, min_size, P_1, P_2, P_3, P_4, P_5, P_6, P_7, P_11, P_12, P_21, P_22, P_31, P_32, P_41, P_42, P_51, P_52, P_61, P_62, P_71, P_72);
+            strassen(P_21, P_22, P_2, block_size, min_size, P_1, P_2, P_3, P_4, P_5, P_6, P_7, P_11, P_12, P_21, P_22, P_31, P_32, P_41, P_42, P_51, P_52, P_61, P_62, P_71, P_72);
+            strassen(P_31, P_32, P_3, block_size, min_size, P_1, P_2, P_3, P_4, P_5, P_6, P_7, P_11, P_12, P_21, P_22, P_31, P_32, P_41, P_42, P_51, P_52, P_61, P_62, P_71, P_72);
+            strassen(P_41, P_42, P_4, block_size, min_size, P_1, P_2, P_3, P_4, P_5, P_6, P_7, P_11, P_12, P_21, P_22, P_31, P_32, P_41, P_42, P_51, P_52, P_61, P_62, P_71, P_72);
+            strassen(P_51, P_52, P_5, block_size, min_size, P_1, P_2, P_3, P_4, P_5, P_6, P_7, P_11, P_12, P_21, P_22, P_31, P_32, P_41, P_42, P_51, P_52, P_61, P_62, P_71, P_72);
+            strassen(P_61, P_62, P_6, block_size, min_size, P_1, P_2, P_3, P_4, P_5, P_6, P_7, P_11, P_12, P_21, P_22, P_31, P_32, P_41, P_42, P_51, P_52, P_61, P_62, P_71, P_72);
+            strassen(P_71, P_72, P_7, block_size, min_size, P_1, P_2, P_3, P_4, P_5, P_6, P_7, P_11, P_12, P_21, P_22, P_31, P_32, P_41, P_42, P_51, P_52, P_61, P_62, P_71, P_72);
 
            
 
@@ -144,26 +122,6 @@ void strassen( float *A, float *B, float *C,int n, int min_size)
                     C[i] = C[i+(i/(n-1))];    
                 }
             }
-            free(P_1);
-            free(P_2);
-            free(P_3);
-            free(P_4);
-            free(P_5);
-            free(P_6);
-            free(P_7);
-            free(P_11);
-            free(P_12);
-            free(P_21);
-            free(P_22);
-            free(P_31);
-            free(P_32);
-            free(P_41);
-            free(P_42);
-            free(P_51);
-            free(P_52);
-            free(P_61);
-            free(P_62);
-            free(P_71);
             free(P_72);
             //printf("sf 7 \n");
             return;
@@ -177,7 +135,13 @@ int main(int argc, char **argv)
     int n = atoi(argv[1]);//(1 << atoi(argv[1])); //Bit shift trick to find powers of 2
     int min_size = atoi(argv[2]);
     int sq_size = n*n;
-    int alloc_size = (n+1)*(n+1);
+    int size_c = n*n;
+    int max_size = (1 << log_2_n);
+    int alloc_size = max_size*max_size;
+
+    for (int i = 0; i < log_2_n; ++i) {
+        size_c *= 7;
+    }
     //float A[sq_size];
     //float B[sq_size];
     //float C[sq_size];
@@ -189,8 +153,29 @@ int main(int argc, char **argv)
     float * B = (float *) malloc(alloc_size * sizeof(float));
     float * C = (float *) malloc(alloc_size * sizeof(float));
     float * D = (float *) malloc(alloc_size * sizeof(float));
-    float * A_aux = (float *) malloc(alloc_size * sizeof(float));
-    float * B_aux = (float *) malloc(alloc_size * sizeof(float));
+    
+    float * P_11 = (float *) malloc(size_c * sizeof(float));
+    float * P_12 = (float *) malloc(size_c * sizeof(float));
+    float * P_21 = (float *) malloc(size_c * sizeof(float));
+    float * P_22 = (float *) malloc(size_c * sizeof(float));
+    float * P_31 = (float *) malloc(size_c * sizeof(float));
+    float * P_32 = (float *) malloc(size_c * sizeof(float));
+    float * P_41 = (float *) malloc(size_c * sizeof(float));
+    float * P_42 = (float *) malloc(size_c * sizeof(float));
+    float * P_51 = (float *) malloc(size_c * sizeof(float));
+    float * P_52 = (float *) malloc(size_c * sizeof(float));
+    float * P_61 = (float *) malloc(size_c * sizeof(float));
+    float * P_62 = (float *) malloc(size_c * sizeof(float));
+    float * P_71 = (float *) malloc(size_c * sizeof(float));
+    float * P_72 = (float *) malloc(size_c * sizeof(float));
+
+    float * P_1 = (float *) malloc(size_c * sizeof(float));
+    float * P_2 = (float *) malloc(size_c * sizeof(float));
+    float * P_3 = (float *) malloc(size_c * sizeof(float));
+    float * P_4 = (float *) malloc(size_c * sizeof(float));
+    float * P_5 = (float *) malloc(size_c * sizeof(float));
+    float * P_6 = (float *) malloc(size_c * sizeof(float));
+    float * P_7 = (float *) malloc(size_c * sizeof(float));
 
     srand48(1) ;
 
@@ -208,7 +193,7 @@ int main(int argc, char **argv)
     cpu_time_used_blas = ((double)(end - start))/CLOCKS_PER_SEC;
 
     start = clock();
-    strassen(A, B, C, n, min_size);
+    strassen(A, B, C, n, min_size, P_1, P_2, P_3, P_4, P_5, P_6, P_7, P_11, P_12, P_21, P_22, P_31, P_32, P_41, P_42, P_51, P_52, P_61, P_62, P_71, P_72);
     end = clock();
     cpu_time_used_strassen = ((double)(end - start))/CLOCKS_PER_SEC;
 
@@ -232,5 +217,31 @@ int main(int argc, char **argv)
     printf("R:  \n\n");
     imp_matriz(n,n,n,R);
     printf("\n\n");
+
+    free(P_1);
+    free(P_2);
+    free(P_3);
+    free(P_4);
+    free(P_5);
+    free(P_6);
+    free(P_7);
+    free(P_11);
+    free(P_12);
+    free(P_21);
+    free(P_22);
+    free(P_31);
+    free(P_32);
+    free(P_41);
+    free(P_42);
+    free(P_51);
+    free(P_52);
+    free(P_61);
+    free(P_62);
+    free(P_71);
+    free(P_72);
+    free(A);
+    free(B);
+    free(C);
+    free(D);
 
 }
