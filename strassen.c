@@ -32,12 +32,11 @@ for (i=0; i<m; i++)
 
 }
 
-void strassen( float *A, float *B, float *C,int n, int min_size, float * P_1, float * P_2, float * P_3, float * P_4, float * P_5, float * P_6, float * P_7, float * P_11, float * P_12, float * P_21, float * P_22, float * P_31, float * P_32, float * P_41, float * P_42, float * P_51, float * P_52, float * P_61, float * P_62, float * P_71, float * P_72)
+void strassen( float *A, float *B, float *C,int n, int min_size, float * P_1, float * P_2, float * P_3, float * P_4, float * P_5, float * P_6, float * P_7, float * P_11, float * P_12, float * P_21, float * P_22, float * P_31, float * P_32, float * P_41, float * P_42, float * P_51, float * P_52, float * P_61, float * P_62, float * P_71, float * P_72, int start)
     {
         float alpha = 1.0;
         float beta = 0.0;
         int i;
-        int odd = 0;        
         if (n < min_size) {
             sgemm("N","N", &n, &n, &n, &alpha, A, &n, B, &n, &beta, C, &n);
             return;
@@ -71,7 +70,6 @@ void strassen( float *A, float *B, float *C,int n, int min_size, float * P_1, fl
             //printf("bs %i sq %i \n",block_size,sq_size);
             //printf("sf 3 \n");
 
-
             for (i = 0; i < sq_size; ++i) {
                 P_11[i] = A[i+block_size*((2*sq_size + i)/block_size)] - A[i+block_size*((2*sq_size + i + block_size)/block_size)];
                 P_12[i] = B[i+block_size*((block_size + i)/block_size)] + B[i+block_size*((2*sq_size + i + block_size)/block_size)]; 
@@ -81,7 +79,7 @@ void strassen( float *A, float *B, float *C,int n, int min_size, float * P_1, fl
 
                 P_31[i] = A[i+block_size*(i/block_size)] - A[i+block_size*((block_size + i)/block_size)];
                 P_32[i] = B[i+block_size*(i/block_size)] + B[i+block_size*((2*sq_size + i)/block_size)];
-            
+           
                 P_41[i] = A[i+block_size*(i/block_size)] + A[i+block_size*((2*sq_size + i)/block_size)];
                 P_42[i] = B[i+block_size*((2*sq_size + i + block_size)/block_size)]; //B_22 
 
@@ -96,16 +94,17 @@ void strassen( float *A, float *B, float *C,int n, int min_size, float * P_1, fl
             }
 
 
+            int old_start = start;
+            start += sq_size;
             //printf("sf 5 \n");
-            strassen(P_11, P_12, P_1, block_size, min_size, P_1, P_2, P_3, P_4, P_5, P_6, P_7, P_11, P_12, P_21, P_22, P_31, P_32, P_41, P_42, P_51, P_52, P_61, P_62, P_71, P_72);
-            strassen(P_21, P_22, P_2, block_size, min_size, P_1, P_2, P_3, P_4, P_5, P_6, P_7, P_11, P_12, P_21, P_22, P_31, P_32, P_41, P_42, P_51, P_52, P_61, P_62, P_71, P_72);
-            strassen(P_31, P_32, P_3, block_size, min_size, P_1, P_2, P_3, P_4, P_5, P_6, P_7, P_11, P_12, P_21, P_22, P_31, P_32, P_41, P_42, P_51, P_52, P_61, P_62, P_71, P_72);
-            strassen(P_41, P_42, P_4, block_size, min_size, P_1, P_2, P_3, P_4, P_5, P_6, P_7, P_11, P_12, P_21, P_22, P_31, P_32, P_41, P_42, P_51, P_52, P_61, P_62, P_71, P_72);
-            strassen(P_51, P_52, P_5, block_size, min_size, P_1, P_2, P_3, P_4, P_5, P_6, P_7, P_11, P_12, P_21, P_22, P_31, P_32, P_41, P_42, P_51, P_52, P_61, P_62, P_71, P_72);
-            strassen(P_61, P_62, P_6, block_size, min_size, P_1, P_2, P_3, P_4, P_5, P_6, P_7, P_11, P_12, P_21, P_22, P_31, P_32, P_41, P_42, P_51, P_52, P_61, P_62, P_71, P_72);
-            strassen(P_71, P_72, P_7, block_size, min_size, P_1, P_2, P_3, P_4, P_5, P_6, P_7, P_11, P_12, P_21, P_22, P_31, P_32, P_41, P_42, P_51, P_52, P_61, P_62, P_71, P_72);
-
-           
+            strassen(P_11 + old_start, P_12 + old_start, P_1 + old_start, block_size, min_size, P_1 + start, P_2 + start, P_3 + start, P_4 + start, P_5 + start, P_6 + start, P_7 + start, P_11 + start, P_12 + start, P_21 + start, P_22 + start, P_31+ start, P_32 + start, P_41 + start, P_42 + start, P_51 + start, P_52 + start, P_61 + start, P_62 + start, P_71 + start, P_72 + start, start);
+            strassen(P_21 + old_start, P_22 + old_start, P_2 + old_start, block_size, min_size, P_1 + start, P_2 + start, P_3 + start, P_4 + start, P_5 + start, P_6 + start, P_7 + start, P_11 + start, P_12 + start, P_21 + start, P_22 + start, P_31+ start, P_32 + start, P_41 + start, P_42 + start, P_51 + start, P_52 + start, P_61 + start, P_62 + start, P_71 + start, P_72 + start, start);
+            strassen(P_31 + old_start, P_32 + old_start, P_2 + old_start, block_size, min_size, P_1 + start, P_2 + start, P_3 + start, P_4 + start, P_5 + start, P_6 + start, P_7 + start, P_11 + start, P_12 + start, P_21 + start, P_22 + start, P_31+ start, P_32 + start, P_41 + start, P_42 + start, P_51 + start, P_52 + start, P_61 + start, P_62 + start, P_71 + start, P_72 + start, start);
+            strassen(P_41 + old_start, P_42 + old_start, P_4 + old_start, block_size, min_size, P_1 + start, P_2 + start, P_3 + start, P_4 + start, P_5 + start, P_6 + start, P_7 + start, P_11 + start, P_12 + start, P_21 + start, P_22 + start, P_31+ start, P_32 + start, P_41 + start, P_42 + start, P_51 + start, P_52 + start, P_61 + start, P_62 + start, P_71 + start, P_72 + start, start);
+            strassen(P_51 + old_start, P_52 + old_start, P_5 + old_start, block_size, min_size, P_1 + start, P_2 + start, P_3 + start, P_4 + start, P_5 + start, P_6 + start, P_7 + start, P_11 + start, P_12 + start, P_21 + start, P_22 + start, P_31+ start, P_32 + start, P_41 + start, P_42 + start, P_51 + start, P_52 + start, P_61 + start, P_62 + start, P_71 + start, P_72 + start, start);
+            strassen(P_61 + old_start, P_62 + old_start, P_6 + old_start, block_size, min_size, P_1 + start, P_2 + start, P_3 + start, P_4 + start, P_5 + start, P_6 + start, P_7 + start, P_11 + start, P_12 + start, P_21 + start, P_22 + start, P_31+ start, P_32 + start, P_41 + start, P_42 + start, P_51 + start, P_52 + start, P_61 + start, P_62 + start, P_71 + start, P_72 + start, start);
+            strassen(P_71 + old_start, P_72 + old_start, P_7 + old_start, block_size, min_size, P_1 + start, P_2 + start, P_3 + start, P_4 + start, P_5 + start, P_6 + start, P_7 + start, P_11 + start, P_12 + start, P_21 + start, P_22 + start, P_31+ start, P_32 + start, P_41 + start, P_42 + start, P_51 + start, P_52 + start, P_61 + start, P_62 + start, P_71 + start, P_72 + start, start);
+            ///////////////////////////////
 
             //printf("sf 6 \n");
             for (i = 0; i < sq_size ; ++i) {
@@ -114,15 +113,6 @@ void strassen( float *A, float *B, float *C,int n, int min_size, float * P_1, fl
                 C[i+block_size*((block_size + i)/block_size)] = P_6[i] + P_7[i];
                 C[i+block_size*((2*sq_size + block_size + i)/block_size)] = P_2[i] - P_3[i] + P_5[i] - P_7[i];
             }
-            imp_matriz(n,n,n,C);
-            if (odd){
-                printf("ODD\n");
-                n -= 1;     
-                for (i = 0; i < n*n; ++i) {
-                    C[i] = C[i+(i/(n-1))];    
-                }
-            }
-            free(P_72);
             //printf("sf 7 \n");
             return;
         }
@@ -136,6 +126,7 @@ int main(int argc, char **argv)
     int min_size = atoi(argv[2]);
     int sq_size = n*n;
     int size_c = n*n;
+    int log_2_n = (int) log2(n);
     int max_size = (1 << log_2_n);
     int alloc_size = max_size*max_size;
 
@@ -147,7 +138,7 @@ int main(int argc, char **argv)
     //float C[sq_size];
     float alpha = 1.0;
     float beta = 0.0;
-    clock_t start, end;
+    clock_t time_1, end;
     double cpu_time_used_strassen, cpu_time_used_blas;
     float * A = (float *) malloc(alloc_size * sizeof(float));
     float * B = (float *) malloc(alloc_size * sizeof(float));
@@ -177,6 +168,8 @@ int main(int argc, char **argv)
     float * P_6 = (float *) malloc(size_c * sizeof(float));
     float * P_7 = (float *) malloc(size_c * sizeof(float));
 
+    int start = 0;
+
     srand48(1) ;
 
     for (int i=0; i<sq_size;i++){
@@ -186,16 +179,16 @@ int main(int argc, char **argv)
     //imp_matriz(n+1,n+1,n+1,A);
     //imp_matriz(n,n,n,B);
     //printf("n: %i \n", n);
-    start = clock();
+    time_1 = clock();
     sgemm("N","N", &n, &n, &n, &alpha, A, &n, B, &n, &beta, D, &n);
     end = clock();
 
-    cpu_time_used_blas = ((double)(end - start))/CLOCKS_PER_SEC;
+    cpu_time_used_blas = ((double)(end - time_1))/CLOCKS_PER_SEC;
 
-    start = clock();
-    strassen(A, B, C, n, min_size, P_1, P_2, P_3, P_4, P_5, P_6, P_7, P_11, P_12, P_21, P_22, P_31, P_32, P_41, P_42, P_51, P_52, P_61, P_62, P_71, P_72);
+    time_1 = clock();
+    strassen(A, B, C, n, min_size, P_1, P_2, P_3, P_4, P_5, P_6, P_7, P_11, P_12, P_21, P_22, P_31, P_32, P_41, P_42, P_51, P_52, P_61, P_62, P_71, P_72, start);
     end = clock();
-    cpu_time_used_strassen = ((double)(end - start))/CLOCKS_PER_SEC;
+    cpu_time_used_strassen = ((double)(end - time_1))/CLOCKS_PER_SEC;
 
     //If checking for residue
     float * R = (float *) malloc(alloc_size * sizeof(float));
