@@ -208,8 +208,8 @@ int main(int argc, char **argv)
     }
 */
 
-    //printf(" %i, %g, %g \n", n, cpu_time_used_strassen, cpu_time_used_blas); //print for script
-    printf(" %i, %g \n", min_size, cpu_time_used_strassen); //print for block size test
+    printf(" %i, %g, %g \n", n, cpu_time_used_strassen, cpu_time_used_blas); //print for script
+    //printf(" %i, %g \n", min_size, cpu_time_used_strassen); //print for block size test
     //printf("TIMES: \n Time_strassen: %g \n Time_blas: %g \n",cpu_time_used_strassen, cpu_time_used_blas);
 /*    printf("A:  \n\n");
     imp_matriz(n,n,n,A);
