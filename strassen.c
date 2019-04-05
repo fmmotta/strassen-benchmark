@@ -141,6 +141,8 @@ void strassen( float *A, float *B, float *C,int n, int min_size, int start_a, in
                 C[start_c + i+block_size*((2*sq_size + block_size + i)/block_size)] -= C[start_c + n*n + 2 * sq_size + i];
             }
 
+            printf("start_c %i\n", start_c);
+            imp_matriz(n,n,n, C);
             if (old_n != n) {
                 for (i = 0; i < old_n*old_n; ++i) {
                     C[start_c + i] = C[start_c + i+(n - old_n)*(i/old_n)];    
@@ -161,7 +163,7 @@ int main(int argc, char **argv)
     int min_size = atoi(argv[2]);
     int sq_size = n*n;
     int max_size = (1 << (int) ceil(log2(n)));//atoi(argv[3]);
-    int alloc_size = max_size*max_size;
+    int alloc_size = 4*n*n;//max_size*max_size;
     //float A[sq_size];
     //float B[sq_size];
     //float C[sq_size];
@@ -214,7 +216,7 @@ int main(int argc, char **argv)
 */    printf("D:  \n\n");
     imp_matriz(n,n,n,D);
     printf("C: \n\n");
-    imp_matriz(n,n,n,C);
+    imp_matriz(10,10,10,C);
    printf("R:  \n\n");
     imp_matriz(n,n,n,R);
     printf("\n\n");
