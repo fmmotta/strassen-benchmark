@@ -1,13 +1,13 @@
 #!/bin/bash
 
 counter=1
-max_size=1000000000
+max_size=10000000000000000
 rm time_results.csv
 touch time_results.csv
 echo "n, time_strassen, time_blas" >> time_results.csv    
 while [ $counter -le $max_size ]
 do    
-    ./a.out $counter 1 >> time_results.csv 
+    ./time_test $counter 1 >> time_results.csv 
     counter=$(( $counter * 2 )) 
 done
 
