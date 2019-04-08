@@ -7,8 +7,8 @@ touch opt_block_results.csv
 echo "n, time_strassen, time_blas" >> opt_block_results.csv    
 while [ $counter -le $max_size ]
 do    
-    ./opt_block_test $counter 513 >> opt_block_results.csv 
+    ./time_test $counter 129 >> opt_block_results.csv 
     counter=$(( $counter * 2 )) 
 done
 
-#gnuplot plot_times
+gnuplot plot_times
