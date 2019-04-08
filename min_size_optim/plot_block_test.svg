@@ -7,7 +7,7 @@
 >
 
 <title>Gnuplot</title>
-<desc>Produced by GNUPLOT 5.2 patchlevel 2 </desc>
+<desc>Produced by GNUPLOT 5.0 patchlevel 6 </desc>
 
 <g id="gnuplot_canvas">
 
@@ -42,101 +42,106 @@
 <g fill="none" color="#FFFFFF" stroke="currentColor" stroke-width="1.00" stroke-linecap="butt" stroke-linejoin="miter">
 </g>
 <g fill="none" color="black" stroke="currentColor" stroke-width="1.00" stroke-linecap="butt" stroke-linejoin="miter">
-	<path stroke='black'  d='M88.5,662.4 L97.5,662.4 M1055.0,662.4 L1046.0,662.4  '/>	<g transform="translate(80.2,666.3)" stroke="none" fill="black" font-family="Verdana" font-size="12.00"  text-anchor="end">
+	<path stroke='black'  d='M71.9,662.4 L80.9,662.4 M1055.0,662.4 L1046.0,662.4  '/>	<g transform="translate(63.6,666.3)" stroke="none" fill="black" font-family="Verdana" font-size="12.00"  text-anchor="end">
 		<text><tspan font-family="Verdana" > 0</tspan></text>
 	</g>
 </g>
 <g fill="none" color="black" stroke="currentColor" stroke-width="1.00" stroke-linecap="butt" stroke-linejoin="miter">
-	<path stroke='black'  d='M88.5,540.7 L97.5,540.7 M1055.0,540.7 L1046.0,540.7  '/>	<g transform="translate(80.2,544.6)" stroke="none" fill="black" font-family="Verdana" font-size="12.00"  text-anchor="end">
-		<text><tspan font-family="Verdana" > 5000</tspan></text>
+	<path stroke='black'  d='M71.9,575.5 L80.9,575.5 M1055.0,575.5 L1046.0,575.5  '/>	<g transform="translate(63.6,579.4)" stroke="none" fill="black" font-family="Verdana" font-size="12.00"  text-anchor="end">
+		<text><tspan font-family="Verdana" > 20</tspan></text>
 	</g>
 </g>
 <g fill="none" color="black" stroke="currentColor" stroke-width="1.00" stroke-linecap="butt" stroke-linejoin="miter">
-	<path stroke='black'  d='M88.5,419.1 L97.5,419.1 M1055.0,419.1 L1046.0,419.1  '/>	<g transform="translate(80.2,423.0)" stroke="none" fill="black" font-family="Verdana" font-size="12.00"  text-anchor="end">
-		<text><tspan font-family="Verdana" > 10000</tspan></text>
+	<path stroke='black'  d='M71.9,488.6 L80.9,488.6 M1055.0,488.6 L1046.0,488.6  '/>	<g transform="translate(63.6,492.5)" stroke="none" fill="black" font-family="Verdana" font-size="12.00"  text-anchor="end">
+		<text><tspan font-family="Verdana" > 40</tspan></text>
 	</g>
 </g>
 <g fill="none" color="black" stroke="currentColor" stroke-width="1.00" stroke-linecap="butt" stroke-linejoin="miter">
-	<path stroke='black'  d='M88.5,297.4 L97.5,297.4 M1055.0,297.4 L1046.0,297.4  '/>	<g transform="translate(80.2,301.3)" stroke="none" fill="black" font-family="Verdana" font-size="12.00"  text-anchor="end">
-		<text><tspan font-family="Verdana" > 15000</tspan></text>
+	<path stroke='black'  d='M71.9,401.7 L80.9,401.7 M1055.0,401.7 L1046.0,401.7  '/>	<g transform="translate(63.6,405.6)" stroke="none" fill="black" font-family="Verdana" font-size="12.00"  text-anchor="end">
+		<text><tspan font-family="Verdana" > 60</tspan></text>
 	</g>
 </g>
 <g fill="none" color="black" stroke="currentColor" stroke-width="1.00" stroke-linecap="butt" stroke-linejoin="miter">
-	<path stroke='black'  d='M88.5,175.8 L97.5,175.8 M1055.0,175.8 L1046.0,175.8  '/>	<g transform="translate(80.2,179.7)" stroke="none" fill="black" font-family="Verdana" font-size="12.00"  text-anchor="end">
-		<text><tspan font-family="Verdana" > 20000</tspan></text>
+	<path stroke='black'  d='M71.9,314.8 L80.9,314.8 M1055.0,314.8 L1046.0,314.8  '/>	<g transform="translate(63.6,318.7)" stroke="none" fill="black" font-family="Verdana" font-size="12.00"  text-anchor="end">
+		<text><tspan font-family="Verdana" > 80</tspan></text>
 	</g>
 </g>
 <g fill="none" color="black" stroke="currentColor" stroke-width="1.00" stroke-linecap="butt" stroke-linejoin="miter">
-	<path stroke='black'  d='M88.5,54.1 L97.5,54.1 M1055.0,54.1 L1046.0,54.1  '/>	<g transform="translate(80.2,58.0)" stroke="none" fill="black" font-family="Verdana" font-size="12.00"  text-anchor="end">
-		<text><tspan font-family="Verdana" > 25000</tspan></text>
+	<path stroke='black'  d='M71.9,227.9 L80.9,227.9 M1055.0,227.9 L1046.0,227.9  '/>	<g transform="translate(63.6,231.8)" stroke="none" fill="black" font-family="Verdana" font-size="12.00"  text-anchor="end">
+		<text><tspan font-family="Verdana" > 100</tspan></text>
 	</g>
 </g>
 <g fill="none" color="black" stroke="currentColor" stroke-width="1.00" stroke-linecap="butt" stroke-linejoin="miter">
-	<path stroke='black'  d='M88.5,662.4 L88.5,653.4 M88.5,54.1 L88.5,63.1  '/>	<g transform="translate(88.5,684.3)" stroke="none" fill="black" font-family="Verdana" font-size="12.00"  text-anchor="middle">
+	<path stroke='black'  d='M71.9,141.0 L80.9,141.0 M1055.0,141.0 L1046.0,141.0  '/>	<g transform="translate(63.6,144.9)" stroke="none" fill="black" font-family="Verdana" font-size="12.00"  text-anchor="end">
+		<text><tspan font-family="Verdana" > 120</tspan></text>
+	</g>
+</g>
+<g fill="none" color="black" stroke="currentColor" stroke-width="1.00" stroke-linecap="butt" stroke-linejoin="miter">
+	<path stroke='black'  d='M71.9,54.1 L80.9,54.1 M1055.0,54.1 L1046.0,54.1  '/>	<g transform="translate(63.6,58.0)" stroke="none" fill="black" font-family="Verdana" font-size="12.00"  text-anchor="end">
+		<text><tspan font-family="Verdana" > 140</tspan></text>
+	</g>
+</g>
+<g fill="none" color="black" stroke="currentColor" stroke-width="1.00" stroke-linecap="butt" stroke-linejoin="miter">
+	<path stroke='black'  d='M71.9,662.4 L71.9,653.4 M71.9,54.1 L71.9,63.1  '/>	<g transform="translate(71.9,684.3)" stroke="none" fill="black" font-family="Verdana" font-size="12.00"  text-anchor="middle">
 		<text><tspan font-family="Verdana" > 0</tspan></text>
 	</g>
 </g>
 <g fill="none" color="black" stroke="currentColor" stroke-width="1.00" stroke-linecap="butt" stroke-linejoin="miter">
-	<path stroke='black'  d='M195.9,662.4 L195.9,653.4 M195.9,54.1 L195.9,63.1  '/>	<g transform="translate(195.9,684.3)" stroke="none" fill="black" font-family="Verdana" font-size="12.00"  text-anchor="middle">
-		<text><tspan font-family="Verdana" > 1000</tspan></text>
+	<path stroke='black'  d='M194.8,662.4 L194.8,653.4 M194.8,54.1 L194.8,63.1  '/>	<g transform="translate(194.8,684.3)" stroke="none" fill="black" font-family="Verdana" font-size="12.00"  text-anchor="middle">
+		<text><tspan font-family="Verdana" > 1</tspan></text>
 	</g>
 </g>
 <g fill="none" color="black" stroke="currentColor" stroke-width="1.00" stroke-linecap="butt" stroke-linejoin="miter">
-	<path stroke='black'  d='M303.3,662.4 L303.3,653.4 M303.3,54.1 L303.3,63.1  '/>	<g transform="translate(303.3,684.3)" stroke="none" fill="black" font-family="Verdana" font-size="12.00"  text-anchor="middle">
-		<text><tspan font-family="Verdana" > 2000</tspan></text>
+	<path stroke='black'  d='M317.7,662.4 L317.7,653.4 M317.7,54.1 L317.7,63.1  '/>	<g transform="translate(317.7,684.3)" stroke="none" fill="black" font-family="Verdana" font-size="12.00"  text-anchor="middle">
+		<text><tspan font-family="Verdana" > 2</tspan></text>
 	</g>
 </g>
 <g fill="none" color="black" stroke="currentColor" stroke-width="1.00" stroke-linecap="butt" stroke-linejoin="miter">
-	<path stroke='black'  d='M410.7,662.4 L410.7,653.4 M410.7,54.1 L410.7,63.1  '/>	<g transform="translate(410.7,684.3)" stroke="none" fill="black" font-family="Verdana" font-size="12.00"  text-anchor="middle">
-		<text><tspan font-family="Verdana" > 3000</tspan></text>
+	<path stroke='black'  d='M440.6,662.4 L440.6,653.4 M440.6,54.1 L440.6,63.1  '/>	<g transform="translate(440.6,684.3)" stroke="none" fill="black" font-family="Verdana" font-size="12.00"  text-anchor="middle">
+		<text><tspan font-family="Verdana" > 3</tspan></text>
 	</g>
 </g>
 <g fill="none" color="black" stroke="currentColor" stroke-width="1.00" stroke-linecap="butt" stroke-linejoin="miter">
-	<path stroke='black'  d='M518.1,662.4 L518.1,653.4 M518.1,54.1 L518.1,63.1  '/>	<g transform="translate(518.1,684.3)" stroke="none" fill="black" font-family="Verdana" font-size="12.00"  text-anchor="middle">
-		<text><tspan font-family="Verdana" > 4000</tspan></text>
+	<path stroke='black'  d='M563.5,662.4 L563.5,653.4 M563.5,54.1 L563.5,63.1  '/>	<g transform="translate(563.5,684.3)" stroke="none" fill="black" font-family="Verdana" font-size="12.00"  text-anchor="middle">
+		<text><tspan font-family="Verdana" > 4</tspan></text>
 	</g>
 </g>
 <g fill="none" color="black" stroke="currentColor" stroke-width="1.00" stroke-linecap="butt" stroke-linejoin="miter">
-	<path stroke='black'  d='M625.4,662.4 L625.4,653.4 M625.4,54.1 L625.4,63.1  '/>	<g transform="translate(625.4,684.3)" stroke="none" fill="black" font-family="Verdana" font-size="12.00"  text-anchor="middle">
-		<text><tspan font-family="Verdana" > 5000</tspan></text>
+	<path stroke='black'  d='M686.3,662.4 L686.3,653.4 M686.3,54.1 L686.3,63.1  '/>	<g transform="translate(686.3,684.3)" stroke="none" fill="black" font-family="Verdana" font-size="12.00"  text-anchor="middle">
+		<text><tspan font-family="Verdana" > 5</tspan></text>
 	</g>
 </g>
 <g fill="none" color="black" stroke="currentColor" stroke-width="1.00" stroke-linecap="butt" stroke-linejoin="miter">
-	<path stroke='black'  d='M732.8,662.4 L732.8,653.4 M732.8,54.1 L732.8,63.1  '/>	<g transform="translate(732.8,684.3)" stroke="none" fill="black" font-family="Verdana" font-size="12.00"  text-anchor="middle">
-		<text><tspan font-family="Verdana" > 6000</tspan></text>
+	<path stroke='black'  d='M809.2,662.4 L809.2,653.4 M809.2,54.1 L809.2,63.1  '/>	<g transform="translate(809.2,684.3)" stroke="none" fill="black" font-family="Verdana" font-size="12.00"  text-anchor="middle">
+		<text><tspan font-family="Verdana" > 6</tspan></text>
 	</g>
 </g>
 <g fill="none" color="black" stroke="currentColor" stroke-width="1.00" stroke-linecap="butt" stroke-linejoin="miter">
-	<path stroke='black'  d='M840.2,662.4 L840.2,653.4 M840.2,54.1 L840.2,63.1  '/>	<g transform="translate(840.2,684.3)" stroke="none" fill="black" font-family="Verdana" font-size="12.00"  text-anchor="middle">
-		<text><tspan font-family="Verdana" > 7000</tspan></text>
-	</g>
-</g>
-<g fill="none" color="black" stroke="currentColor" stroke-width="1.00" stroke-linecap="butt" stroke-linejoin="miter">
-	<path stroke='black'  d='M947.6,662.4 L947.6,653.4 M947.6,54.1 L947.6,63.1  '/>	<g transform="translate(947.6,684.3)" stroke="none" fill="black" font-family="Verdana" font-size="12.00"  text-anchor="middle">
-		<text><tspan font-family="Verdana" > 8000</tspan></text>
+	<path stroke='black'  d='M932.1,662.4 L932.1,653.4 M932.1,54.1 L932.1,63.1  '/>	<g transform="translate(932.1,684.3)" stroke="none" fill="black" font-family="Verdana" font-size="12.00"  text-anchor="middle">
+		<text><tspan font-family="Verdana" > 7</tspan></text>
 	</g>
 </g>
 <g fill="none" color="black" stroke="currentColor" stroke-width="1.00" stroke-linecap="butt" stroke-linejoin="miter">
 	<path stroke='black'  d='M1055.0,662.4 L1055.0,653.4 M1055.0,54.1 L1055.0,63.1  '/>	<g transform="translate(1055.0,684.3)" stroke="none" fill="black" font-family="Verdana" font-size="12.00"  text-anchor="middle">
-		<text><tspan font-family="Verdana" > 9000</tspan></text>
+		<text><tspan font-family="Verdana" > 8</tspan></text>
 	</g>
 </g>
 <g fill="none" color="black" stroke="currentColor" stroke-width="1.00" stroke-linecap="butt" stroke-linejoin="miter">
 </g>
 <g fill="none" color="black" stroke="currentColor" stroke-width="1.00" stroke-linecap="butt" stroke-linejoin="miter">
-	<path stroke='black'  d='M88.5,54.1 L88.5,662.4 L1055.0,662.4 L1055.0,54.1 L88.5,54.1 Z  '/></g>
+	<path stroke='black'  d='M71.9,54.1 L71.9,662.4 L1055.0,662.4 L1055.0,54.1 L71.9,54.1 Z  '/></g>
 <g fill="none" color="black" stroke="currentColor" stroke-width="1.00" stroke-linecap="butt" stroke-linejoin="miter">
-	<g transform="translate(16.3,358.3) rotate(270)" stroke="none" fill="black" font-family="Verdana" font-size="12.00"  text-anchor="middle">
-		<text><tspan font-family="Verdana" >Time</tspan></text>
+	<g transform="translate(17.0,358.3) rotate(270)" stroke="none" fill="black" font-family="Verdana" font-size="12.00"  text-anchor="middle">
+		<text><tspan font-family="Verdana" >Time (s)</tspan></text>
 	</g>
 </g>
 <g fill="none" color="black" stroke="currentColor" stroke-width="1.00" stroke-linecap="butt" stroke-linejoin="miter">
-	<g transform="translate(571.7,711.3)" stroke="none" fill="black" font-family="Verdana" font-size="12.00"  text-anchor="middle">
-		<text><tspan font-family="Verdana" >Min Block Size</tspan></text>
+	<g transform="translate(563.4,711.3)" stroke="none" fill="black" font-family="Verdana" font-size="12.00"  text-anchor="middle">
+		<text><tspan font-family="Verdana" >log(Min Block Size)</tspan></text>
 	</g>
 </g>
 <g fill="none" color="black" stroke="currentColor" stroke-width="1.00" stroke-linecap="butt" stroke-linejoin="miter">
-	<g transform="translate(571.7,31.0)" stroke="none" fill="black" font-family="Verdana" font-size="12.00"  text-anchor="middle">
+	<g transform="translate(563.4,31.0)" stroke="none" fill="black" font-family="Verdana" font-size="12.00"  text-anchor="middle">
 		<text><tspan font-family="Verdana" >Time Comparison</tspan></text>
 	</g>
 </g>
@@ -147,8 +152,8 @@
 	</g>
 </g>
 <g fill="none" color="black" stroke="currentColor" stroke-width="1.00" stroke-linecap="butt" stroke-linejoin="miter">
-	<path stroke='rgb(148,   0, 211)'  d='M996.2,72.1 L1038.4,72.1 M968.2,657.3 L528.4,655.3 L308.4,651.3 L198.5,643.7 L143.5,630.2 L116.0,604.0
-		L102.2,652.6 L95.4,645.5 L91.9,633.2 L90.2,606.4 L89.4,534.0 L88.9,169.6 L88.7,330.3  '/></g>
+	<path stroke='rgb(148,   0, 211)'  d='M996.2,72.1 L1038.4,72.1 M1008.9,542.5 L923.7,558.9 L838.5,569.9 L753.3,576.7 L668.2,578.1 L583.0,579.9
+		L497.8,555.8 L412.6,539.2 L327.4,486.5 L242.3,376.8 L157.1,92.4  '/></g>
 	</g>
 <g fill="none" color="#FFFFFF" stroke="rgb(148,   0, 211)" stroke-width="2.00" stroke-linecap="butt" stroke-linejoin="miter">
 </g>
@@ -157,7 +162,7 @@
 <g fill="none" color="black" stroke="black" stroke-width="1.00" stroke-linecap="butt" stroke-linejoin="miter">
 </g>
 <g fill="none" color="black" stroke="currentColor" stroke-width="1.00" stroke-linecap="butt" stroke-linejoin="miter">
-	<path stroke='black'  d='M88.5,54.1 L88.5,662.4 L1055.0,662.4 L1055.0,54.1 L88.5,54.1 Z  '/></g>
+	<path stroke='black'  d='M71.9,54.1 L71.9,662.4 L1055.0,662.4 L1055.0,54.1 L71.9,54.1 Z  '/></g>
 <g fill="none" color="black" stroke="currentColor" stroke-width="1.00" stroke-linecap="butt" stroke-linejoin="miter">
 </g>
 </g>

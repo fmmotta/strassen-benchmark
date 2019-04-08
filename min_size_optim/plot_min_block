@@ -2,10 +2,10 @@ set terminal svg enhanced background rgb 'white' size 1080,720 fname 'Verdana'
 set output 'plot_block_test.svg'
 
 set title "Time Comparison"
-set xlabel "Min Block Size"
-set ylabel "Time"
+set xlabel "log(Min Block Size)"
+set ylabel "Time (s)"
 
-plot 'block_results.csv' using 1:2 with lines title 'Min Block Sizes'
+plot 'block_results.csv' using (log($1)):2 with lines title 'Min Block Sizes'
 
 set terminal x11
 set output

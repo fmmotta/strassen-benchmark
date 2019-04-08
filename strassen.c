@@ -39,7 +39,7 @@ void strassen( float *A, float *B, float *C,int n, int min_size, int start_a, in
             C[start_c] = A[start_a]*B[start_b];
             return;
         }
-        else if (n < min_size) {
+        else if (n <= min_size) {
             float alpha = 1.0;
             float beta = 0.0;
             sgemm("N","N", &n, &n, &n, &alpha, A + start_a, &n, B + start_b, &n, &beta, C + start_c, &n);
@@ -84,9 +84,12 @@ void strassen( float *A, float *B, float *C,int n, int min_size, int start_a, in
             int c_21_index = start_c + block_size;
             int c_22_index = c_12_index + block_size;
             
+            int counter_step;
+
             for (i = 0; i < sq_size; ++i) {
-                C[start_aux_1 + i] = A[a_12_index + i + block_size*(i/block_size)] - A[a_22_index + i + block_size*(i/block_size)];
-                C[start_aux_2 + i] = B[b_21_index + i + block_size*(i/block_size)] + B[b_22_index + i + block_size*(i/block_size)]; 
+                counter_step = i + block_size*(i/block_size);
+                C[start_aux_1 + i] = A[a_12_index + counter_step] - A[a_22_index + counter_step];
+                C[start_aux_2 + i] = B[b_21_index + counter_step] + B[b_22_index + counter_step]; 
             }
             strassen(C, C, C, block_size, min_size, start_a_next_level, start_b_next_level, start_c_next_level);
             
@@ -95,19 +98,22 @@ void strassen( float *A, float *B, float *C,int n, int min_size, int start_a, in
             }
 
             for (i = 0; i < sq_size; ++i) {     
-                C[start_aux_1 + i] = A[start_a + i+block_size*(i/block_size)] + A[a_22_index + i + block_size*(i/block_size)];  
-                C[start_aux_2 + i] = B[start_b + i+block_size*(i/block_size)] + B[b_22_index + i + block_size*(i/block_size)];
+                counter_step = i + block_size*(i/block_size);
+                C[start_aux_1 + i] = A[start_a + counter_step] + A[a_22_index + counter_step];  
+                C[start_aux_2 + i] = B[start_b + counter_step] + B[b_22_index + counter_step];
             }
             strassen(C, C, C, block_size, min_size, start_a_next_level, start_b_next_level, start_c_next_level);
             
             for (i = 0; i < sq_size ; ++i) {
-                C[start_c + i+block_size*(i/block_size)] += C[start_c_next_level + i];
-                C[c_22_index + i + block_size*(i/block_size)] = C[start_c_next_level + i]; 
+                counter_step = i + block_size*(i/block_size);
+                C[start_c + counter_step] += C[start_c_next_level + i];
+                C[c_22_index + counter_step] = C[start_c_next_level + i]; 
             }
 
             for (i = 0; i < sq_size; ++i) {     
-                C[start_aux_1 + i] = A[start_a + i+block_size*(i/block_size)] - A[a_21_index + i + block_size*(i/block_size)];
-                C[start_aux_2 + i] = B[start_b + i+block_size*(i/block_size)] + B[b_12_index + i + block_size*(i/block_size)];
+                counter_step = i + block_size*(i/block_size);
+                C[start_aux_1 + i] = A[start_a + counter_step] - A[a_21_index + counter_step];
+                C[start_aux_2 + i] = B[start_b + counter_step] + B[b_12_index + counter_step];
             }
             strassen(C, C, C, block_size, min_size, start_a_next_level, start_b_next_level, start_c_next_level);
             
@@ -116,47 +122,55 @@ void strassen( float *A, float *B, float *C,int n, int min_size, int start_a, in
             }
             
             for (i = 0; i < sq_size; ++i) {     
-                C[start_aux_1 + i] = A[start_a + i+block_size*(i/block_size)] + A[a_12_index + i + block_size*(i/block_size)];
-                C[start_aux_2 + i] = B[b_22_index + i + block_size*(i/block_size)]; //B_22 
+                counter_step = i + block_size*(i/block_size);
+                C[start_aux_1 + i] = A[start_a + counter_step] + A[a_12_index + counter_step];
+                C[start_aux_2 + i] = B[b_22_index + counter_step]; //B_22 
             }
             strassen(C, C, C, block_size, min_size, start_a_next_level, start_b_next_level, start_c_next_level);
 
             for (i = 0; i < sq_size ; ++i) {
-                C[start_c + i+block_size*(i/block_size)] -= C[start_c_next_level + i];
-                C[c_12_index + i + block_size*(i/block_size)] = C[start_c_next_level + i];
+                counter_step = i + block_size*(i/block_size);
+                C[start_c + counter_step] -= C[start_c_next_level + i];
+                C[c_12_index + counter_step] = C[start_c_next_level + i];
             }
 
             for (i = 0; i < sq_size; ++i) {     
-                C[start_aux_1 + i] = A[start_a + i+block_size*(i/block_size)]; //A_11         
-                C[start_aux_2 + i] = B[b_12_index + i + block_size*(i/block_size)] - B[b_22_index + i + block_size*(i/block_size)];
+                counter_step = i + block_size*(i/block_size);
+                C[start_aux_1 + i] = A[start_a + counter_step]; //A_11         
+                C[start_aux_2 + i] = B[b_12_index + counter_step] - B[b_22_index + counter_step];
             }
             strassen(C, C, C, block_size, min_size, start_a_next_level, start_b_next_level, start_c_next_level);
 
             for (i = 0; i < sq_size ; ++i) {
-                C[c_12_index + i + block_size*(i/block_size)] += C[start_c_next_level + i];
-                C[c_22_index + i + block_size*(i/block_size)] += C[start_c_next_level + i];
+                counter_step = i + block_size*(i/block_size);
+                C[c_12_index + counter_step] += C[start_c_next_level + i];
+                C[c_22_index + counter_step] += C[start_c_next_level + i];
             }
 
             for (i = 0; i < sq_size; ++i) {     
-                C[start_aux_1 + i] = A[a_22_index + i + block_size*(i/block_size)]; //A_22 
-                C[start_aux_2 + i] = B[b_21_index + i + block_size*(i/block_size)] - B[start_b + i+block_size*(i/block_size)];
+                counter_step = i + block_size*(i/block_size);
+                C[start_aux_1 + i] = A[a_22_index + counter_step]; //A_22 
+                C[start_aux_2 + i] = B[b_21_index + counter_step] - B[start_b + counter_step];
             }
             strassen(C, C, C, block_size, min_size, start_a_next_level, start_b_next_level, start_c_next_level);
 
             for (i = 0; i < sq_size ; ++i) {
-                C[start_c + i+block_size*(i/block_size)] += C[start_c_next_level + i];
-                C[c_21_index + i + block_size*(i/block_size)] = C[start_c_next_level + i];
+                counter_step = i + block_size*(i/block_size);
+                C[start_c + counter_step] += C[start_c_next_level + i];
+                C[c_21_index + counter_step] = C[start_c_next_level + i];
             }
 
             for (i = 0; i < sq_size; ++i) {     
-                C[start_aux_1 + i] = A[a_21_index + i + block_size*(i/block_size)] + A[a_22_index + i + block_size*(i/block_size)];
-                C[start_aux_2 + i] = B[start_b + i+block_size*(i/block_size)]; //B_11 
+                counter_step = i + block_size*(i/block_size);
+                C[start_aux_1 + i] = A[a_21_index + counter_step] + A[a_22_index + counter_step];
+                C[start_aux_2 + i] = B[start_b + counter_step]; //B_11 
             }
             strassen(C, C, C, block_size, min_size, start_a_next_level, start_b_next_level, start_c_next_level);
 
             for (i = 0; i < sq_size ; ++i) {
-                C[c_21_index + i + block_size*(i/block_size)] += C[start_c_next_level + i];
-                C[c_22_index + i + block_size*(i/block_size)] -= C[start_c_next_level + i];
+                counter_step = i + block_size*(i/block_size);
+                C[c_21_index + counter_step] += C[start_c_next_level + i];
+                C[c_22_index + counter_step] -= C[start_c_next_level + i];
             }
 
 /*            if (old_n != n) {
@@ -177,8 +191,8 @@ int main(int argc, char **argv)
 
     int n = atoi(argv[1]);//(1 << atoi(argv[1])); //Bit shift trick to find powers of 2
     int min_size = atoi(argv[2]);
-    int sq_size = n*n;
-    long alloc_size = 2*n*n;//max_size*max_size;
+    size_t sq_size = n*n;
+    size_t alloc_size = 2*n*n;//max_size*max_size;
     //float A[sq_size];
     //float B[sq_size];
     //float C[sq_size];
@@ -220,7 +234,7 @@ int main(int argc, char **argv)
 */
 
     printf(" %i, %g, %g \n", n, cpu_time_used_strassen, cpu_time_used_blas); //print for script
-//    printf(" %i, %g \n", min_size, cpu_time_used_strassen); //print for block size test
+    //printf(" %i, %g \n", min_size, cpu_time_used_strassen); //print for block size test
     //printf("TIMES: \n Time_strassen: %g \n Time_blas: %g \n",cpu_time_used_strassen, cpu_time_used_blas);
 /*    printf("A:  \n\n");
     imp_matriz(n,n,n,A);
@@ -237,4 +251,5 @@ int main(int argc, char **argv)
     free(A);
     free(B);
     free(C);
+    free(D);
 }

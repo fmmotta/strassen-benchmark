@@ -3,8 +3,9 @@ set output 'plot_time.svg'
 
 set title "Time Comparison"
 set xlabel "Matrix Size"
-set ylabel "Time"
+set ylabel "Time (s)"
 
+#plot 'time_results.csv' using (log($1)):2 with lines title 'Strassen', 'time_results.csv' using (log($1)):3 with lines title 'BLAS'
 plot 'time_results.csv' using 1:2 with lines title 'Strassen', 'time_results.csv' using 1:3 with lines title 'BLAS'
 
 set terminal x11
