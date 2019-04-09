@@ -234,7 +234,7 @@ int main(int argc, char **argv)
 */
 //    Frobenius Residue
 
-    double r_sq;
+ /*   double r_sq;
     double r;
     double blas_sq;
     double blas;
@@ -246,7 +246,7 @@ int main(int argc, char **argv)
 
     //for error_testing
     printf("%i, %g \n",n,r);
-
+*/
 
 //    printf(" %i, %g, %g \n", n, cpu_time_used_strassen, cpu_time_used_blas); //print for script
     //printf(" %i, %g \n", min_size, cpu_time_used_strassen); //print for block size test
