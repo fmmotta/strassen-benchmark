@@ -1,13 +1,13 @@
 #!/bin/bash
 
-counter=16384
-max_size=15000   
+counter=2048
+max_size=2   
 rm block_results.csv
 touch block_results.csv
 echo "n, time_strassen" >> block_results.csv    
-while [ $counter -ge 2 ]
+while [ $counter -ge $max_size ]
 do    
-    ./a.out 10000 $counter  >> block_results.csv 
+    ./min_block_search 4096 $counter  >> block_results.csv 
     counter=$(( $counter / 2 )) 
 done
 

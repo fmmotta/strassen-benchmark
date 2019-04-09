@@ -1,0 +1,53 @@
+This is BibTeX, Version 0.99d (TeX Live 2017)
+Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
+The top-level auxiliary file: report_strassen.aux
+The style file: ieeetr.bst
+Database file #1: bibliography.bib
+I was expecting a `,' or a `}'---line 38 of file bibliography.bib
+ : 
+ : journal = {International Conference for High Performance Computing, Networking, Storage and Analysis},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+Warning--empty journal in Huang
+You've used 5 entries,
+            1876 wiz_defined-function locations,
+            512 strings with 4134 characters,
+and the built_in function-call counts, 1130 in all, are:
+= -- 105
+> -- 43
+< -- 0
++ -- 17
+- -- 12
+* -- 76
+:= -- 170
+add.period$ -- 7
+call.type$ -- 5
+change.case$ -- 3
+chr.to.int$ -- 0
+cite$ -- 6
+duplicate$ -- 58
+empty$ -- 112
+format.name$ -- 12
+if$ -- 274
+int.to.chr$ -- 0
+int.to.str$ -- 5
+missing$ -- 7
+newline$ -- 20
+num.names$ -- 5
+pop$ -- 20
+preamble$ -- 1
+purify$ -- 0
+quote$ -- 0
+skip$ -- 34
+stack$ -- 0
+substring$ -- 56
+swap$ -- 20
+text.length$ -- 0
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 0
+warning$ -- 1
+while$ -- 9
+width$ -- 6
+write$ -- 46
+(There was 1 error message)
