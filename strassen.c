@@ -232,8 +232,23 @@ int main(int argc, char **argv)
         R[i] = D[i] - C[start_c + i];
     }
 */
+//    Frobenius Residue
 
-    printf(" %i, %g, %g \n", n, cpu_time_used_strassen, cpu_time_used_blas); //print for script
+    double r_sq;
+    double r;
+    double blas_sq;
+    double blas;
+    for (int i=0; i<sq_size;i++){
+	r_sq += pow(D[i] - C[i], 2);
+	blas_sq += pow(D[i],2);
+    }
+    r = sqrt(r_sq)/sqrt(blas_sq);
+
+    //for error_testing
+    printf("%i, %g \n",n,r);
+
+
+//    printf(" %i, %g, %g \n", n, cpu_time_used_strassen, cpu_time_used_blas); //print for script
     //printf(" %i, %g \n", min_size, cpu_time_used_strassen); //print for block size test
     //printf("TIMES: \n Time_strassen: %g \n Time_blas: %g \n",cpu_time_used_strassen, cpu_time_used_blas);
 /*    printf("A:  \n\n");

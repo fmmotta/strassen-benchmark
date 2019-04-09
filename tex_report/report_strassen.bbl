@@ -1,0 +1,25 @@
+\begin{thebibliography}{1}
+
+\bibitem{Demmel}
+J.~W. Demmel, {\em Applied numerical linear algebra}.
+\newblock Siam, 1997.
+
+\bibitem{Pan}
+V.~Pan, {\em How to Multiply Matrices Faster}.
+\newblock Berlin, Heidelberg: Springer-Verlag, 1984.
+
+\bibitem{Strassen}
+V.~Strassen, ``Gaussian elimination is not optimal,'' {\em Numerische
+  Mathematik}, vol.~13, pp.~354--356, 08 1969.
+
+\bibitem{Lederman}
+S.~Huss-Lederman, E.~Jacobson, J.~Johnson, A.~Tsao, and T.~Turnbull,
+  ``Implementation of strassen's algorithm for matrix multiplication,'' {\em
+  Supercomputing '96:Proceedings of the 1996 ACM/IEEE Conference on
+  Supercomputing}, 08 1996.
+
+\bibitem{Huang}
+J.~Huang, T.~M.~Smith, G.~M.~Henry, and R.~van~de Geijn, ``Strassen's algorithm
+  reloaded,'' pp.~690--701, 11 2016.
+
+\end{thebibliography}

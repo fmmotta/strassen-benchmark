@@ -1,0 +1,22 @@
+set terminal svg enhanced background rgb 'white' size 1080,720 fname 'Verdana' 
+set output 'plot_time_no_opt_log.svg'
+
+set title "Time Comparison - Log x Log"
+set xlabel "log(Matrix Size)"
+set ylabel "log(Time)"
+
+#plot 'time_results_no_opt.csv' using 1:2 with lines title 'Strassen', 'time_results_no_opt.csv' using 1:3 with lines title 'BLAS'
+plot 'time_results_no_opt.csv' using (log($1)):(log($2)) with lines title 'Strassen', 'time_results_no_opt.csv' using (log($1)):(log($3)) with lines title 'BLAS'
+
+f(x) = m*x + b
+fit [4:8] f(x) 'time_results_no_opt.csv' using (log($1)):(log($2)) via m,b
+
+fit [4:8] f(x) 'time_results_no_opt.csv' using (log($1)):(log($3)) via m,b
+
+set terminal x11
+set output
+replot
+
+#pause -1 "Hit any key to continue"
+
+
